@@ -12,11 +12,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class MenuTest {
+class EmployeeTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Menu menu;
+	private Employee employee;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,19 +31,19 @@ class MenuTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		menu = em.find(Menu.class, 1);
+		employee = em.find(Employee.class, 2);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		menu = null;
+		employee = null;
 	}
 
 	@Test
 	void test_Post_entity_mapping() {
-		assertNotNull(menu);
-		assertEquals("Wings", menu.getName());
+		assertNotNull(employee);
+		assertEquals("Davis", employee.getLastName());
 	}
 
 }

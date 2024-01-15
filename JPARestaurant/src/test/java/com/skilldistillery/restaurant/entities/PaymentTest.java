@@ -2,6 +2,8 @@ package com.skilldistillery.restaurant.entities;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,11 +14,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class MenuTest {
+class PaymentTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Menu menu;
+	private Payment payment;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,19 +33,18 @@ class MenuTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		menu = em.find(Menu.class, 1);
+		payment = em.find(Payment.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		menu = null;
+		payment = null;
 	}
 
 	@Test
 	void test_Post_entity_mapping() {
-		assertNotNull(menu);
-		assertEquals("Wings", menu.getName());
+	    assertNotNull(payment);
+	    assertEquals("Credit Card", payment.getPaymentMethod());
 	}
-
 }

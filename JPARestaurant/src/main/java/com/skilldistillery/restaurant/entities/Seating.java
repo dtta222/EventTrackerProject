@@ -2,25 +2,22 @@ package com.skilldistillery.restaurant.entities;
 
 import java.util.Objects;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Menu {
+public class Seating {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	private double price;
-	private String description;
-	@Column(name = "category_id")
-	private int category;
+	private int capacity;
+	private String status;
 	
-	public Menu() {
+	public Seating() {
 		super();
 	}
 
@@ -40,28 +37,20 @@ public class Menu {
 		this.name = name;
 	}
 
-	public int getCategory() {
-		return category;
+	public int getCapacity() {
+		return capacity;
 	}
 
-	public void setCategory(int category) {
-		this.category = category;
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
 	}
 
-	public double getPrice() {
-		return price;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override
@@ -77,15 +66,19 @@ public class Menu {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Menu other = (Menu) obj;
+		Seating other = (Seating) obj;
 		return id == other.id;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Menu [id=").append(id).append(", name=").append(name).append(", price=").append(price)
-				.append(", description=").append(description).append(", category=").append(category).append("]");
+		builder.append("Seating [id=").append(id).append(", name=").append(name).append(", capacity=").append(capacity)
+				.append(", status=").append(status).append("]");
 		return builder.toString();
 	}
+
+	
+	
+	
 }
