@@ -43,7 +43,7 @@ class CustomerOrderTest {
 	@Test
 	void test_Order_entity_mapping() {
 	    assertNotNull(order);
-	    assertEquals(101, order.getCustomerID());
+	    assertEquals(3, order.getTableID());
 	}
 
 

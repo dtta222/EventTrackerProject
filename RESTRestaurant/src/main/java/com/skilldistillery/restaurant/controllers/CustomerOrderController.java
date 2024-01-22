@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.skilldistillery.restaurant.data.CustomerOrderDAO;
 import com.skilldistillery.restaurant.entities.CustomerOrder;
+import com.skilldistillery.restaurant.entities.CustomerOrderItem;
 import com.skilldistillery.restaurant.entities.Menu;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class CustomerOrderController {
     }
 
     @GetMapping("/{orderId}")
-    public ResponseEntity<CustomerOrder> getOrderById(@PathVariable int orderId) {
+    public ResponseEntity<CustomerOrder> getOrderById(@PathVariable(name = "orderId") int orderId) {
         CustomerOrder order = customerOrderDAO.getOrderById(orderId);
         if (order != null) {
             return new ResponseEntity<>(order, HttpStatus.OK);
@@ -38,9 +39,11 @@ public class CustomerOrderController {
         }
     }
 
+    
     @GetMapping("/all")
     public ResponseEntity<List<CustomerOrder>> getAllOrders() {
         List<CustomerOrder> orders = customerOrderDAO.getAllOrders();
+        
         if (orders != null && !orders.isEmpty()) {
             return new ResponseEntity<>(orders, HttpStatus.OK);
         } else {
@@ -68,7 +71,7 @@ public class CustomerOrderController {
         }
     }
 
-    // Endpoint to add an item to an existing order
+    /*// Endpoint to add an item to an existing order
     @PostMapping("/{orderId}/items")
     public ResponseEntity<CustomerOrder> addItemToOrder(@PathVariable int orderId, @RequestBody Menu menuItem) {
         CustomerOrder updatedOrder = customerOrderDAO.addItemToOrder(orderId, menuItem);
@@ -88,5 +91,5 @@ public class CustomerOrderController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
+    }*/
 }

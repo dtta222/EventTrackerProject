@@ -36,13 +36,17 @@ public class CustomerOrder {
     @Column(name = "server_id")
     private int serverID;
     
-    @OneToMany(mappedBy = "customerOrder", cascade = CascadeType.ALL)
-    private List<CustomerOrderItem> orderItems;
+    /*@OneToMany(mappedBy = "customerOrder", cascade = CascadeType.ALL)
+    private List<CustomerOrderItem> orderItems;*/
     
-	public CustomerOrder() {
-		super();
-		this.orderItems = new ArrayList<>();
-	}
+    @OneToMany(mappedBy = "customerOrder", cascade = CascadeType.PERSIST)
+    private List<CustomerOrderItem> orderItems;
+
+
+    public CustomerOrder() {
+        super();
+        this.orderItems = new ArrayList<>();
+    }
 
 	public int getId() {
 		return id;
@@ -126,29 +130,20 @@ public class CustomerOrder {
 		return builder.toString();
 	}
 
-	public List<CustomerOrderItem> getOrderItems() {
-        return orderItems;
+	public void addItem(Menu menuItem, int quantity) {
+        CustomerOrderItem orderItem = new CustomerOrderItem();
+        orderItem.setMenuItem(menuItem);
+        orderItem.setQuantity(quantity);
+        orderItem.setSubtotal(menuItem.getPrice() * quantity);
+        orderItem.setCustomerOrder(this); // Set the bidirectional relationship
+        orderItems.add(orderItem);
     }
 
-    public void setOrderItems(List<CustomerOrderItem> orderItems) {
-        this.orderItems = orderItems;
-    }
-
-    // Updated getItems() method
     public List<Menu> getItems() {
         List<Menu> items = new ArrayList<>();
         for (CustomerOrderItem orderItem : orderItems) {
             items.add(orderItem.getMenuItem());
         }
         return items;
-    }
-
-    // Updated addItem() method
-    public void addItem(Menu menuItem, int quantity) {
-        CustomerOrderItem orderItem = new CustomerOrderItem();
-        orderItem.setItemID(menuItem.getId());
-        orderItem.setQuantity(quantity);
-        orderItem.setSubtotal(menuItem.getPrice() * quantity);
-        orderItems.add(orderItem);
     }
 }

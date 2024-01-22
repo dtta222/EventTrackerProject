@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.restaurant.entities.Category;
 import com.skilldistillery.restaurant.entities.CustomerOrder;
+import com.skilldistillery.restaurant.entities.CustomerOrderItem;
 import com.skilldistillery.restaurant.entities.Menu;
 
 import jakarta.persistence.EntityManager;
@@ -18,11 +20,15 @@ public class CustomerOrderDAOImpl implements CustomerOrderDAO {
     @PersistenceContext
     private EntityManager em;
 
-    @Override
+    /*@Override
     public CustomerOrder createOrder(CustomerOrder order) {
         em.persist(order);
         return order;
+    }*/
+    public CustomerOrder createOrder(CustomerOrder order) {
+        return em.merge(order);
     }
+
 
     @Override
     public CustomerOrder updateOrder(CustomerOrder order) {
@@ -63,15 +69,20 @@ public class CustomerOrderDAOImpl implements CustomerOrderDAO {
     }
 
     @Override
+    public List<CustomerOrderItem> getOrderItems(int orderId) {
+        return em.createQuery("SELECT c FROM CustomerOrderItem c WHERE c.order.id = :orderId", CustomerOrderItem.class)
+                .setParameter("orderId", orderId)
+                .getResultList();
+    }
+
+    @Override
     public CustomerOrder addItemToOrder(int orderId, Menu menuItem) {
         CustomerOrder order = em.find(CustomerOrder.class, orderId);
         if (order != null) {
-            order.addItem(menuItem, orderId);
+            order.addItem(menuItem, 1); // Assuming quantity is 1, modify as needed
             em.merge(order);
-            return order;
-        } else {
-            return null;
         }
+        return order;
     }
 
     @Override

@@ -1,11 +1,11 @@
-package com.skilldistillery.restaurant.controllers;
+package com.skilldistillery.restaurant.controllers.not_used;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.skilldistillery.restaurant.data.ReservationDAO;
+import com.skilldistillery.restaurant.data.not_used.ReservationDAO;
 import com.skilldistillery.restaurant.entities.Reservation;
 
 import java.util.List;

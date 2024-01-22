@@ -1,4 +1,4 @@
-package com.skilldistillery.restaurant.data;
+package com.skilldistillery.restaurant.data.not_used;
 
 import java.util.List;
 

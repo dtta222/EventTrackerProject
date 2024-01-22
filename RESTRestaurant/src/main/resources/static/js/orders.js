@@ -1,6 +1,6 @@
 console.log('orders.js loaded');
 
-let ordersList = []; // To store the current orders
+let ordersList = [];
 
 window.addEventListener('load', function (evt) {
     console.log('Page loaded, DOM complete');
@@ -27,8 +27,10 @@ function loadOrders() {
 }
 
 function displayOrders(orders) {
+	console.log(orders);
+
     let tbody = document.getElementById('ordersBody');
-    tbody.innerHTML = ''; // Clear previous content
+    tbody.innerHTML = '';
 
     for (let order of orders) {
         let tr = document.createElement('tr');
