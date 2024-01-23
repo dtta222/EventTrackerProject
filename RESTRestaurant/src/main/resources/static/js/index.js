@@ -47,3 +47,15 @@ function displayMenu(menu) {
         tr.appendChild(td);
     }
 }
+
+
+function navigateToCustomers() {
+    window.location.href = '/customers.html';
+}
+
+
+function navigateToOrders() {
+    window.location.href = '/orders.html';
+}
+
+

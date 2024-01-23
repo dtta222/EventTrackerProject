@@ -100,24 +100,30 @@ function removeFromOrder(item) {
 }
 
 function placeOrder() {
-    console.log('Placing order:', orderList);
+    // Create the order object to send to the server
+    const orderObject = {
+        customerID: 105,  // Replace with the actual customer ID
+        tableID: 5,       // Replace with the actual table ID
+        orderDate: "2024-03-01T20:00:00",  // Replace with the actual order date
+        totalAmount: calculateTotalAmount(orderList),  // Assuming you have a function to calculate the total amount
+        status: "In Progress",  
+        serverID: 2,  
+        items: orderList.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            description: item.description,  
+            category: item.category  
+        }))
+    };
 
-    // Assuming your server endpoint for creating orders is "/api/orders"
+    // Make a POST request to the server
     fetch('/api/orders', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            // You may need to adjust this based on your server's expected order format
-            customerID: 1,  // Replace with the actual customer ID
-            tableID: 1,     // Replace with the actual table ID
-            // Add other necessary properties based on your CustomerOrder entity
-            items: orderList.map(item => ({
-                itemId: item.id,
-                quantity: 1,  // You may adjust the quantity as needed
-            })),
-        }),
+        body: JSON.stringify(orderObject),
     })
     .then(response => {
         if (response.ok) {
@@ -125,7 +131,6 @@ function placeOrder() {
             // Reset the orderList after placing the order
             orderList = [];
             displayOrder(orderList);
-            // You can add additional logic or redirection if needed
         } else {
             console.error('Failed to place order:', response.status);
             // Handle the error accordingly
@@ -135,18 +140,15 @@ function placeOrder() {
         console.error('Error placing order:', error);
         // Handle the error accordingly
     });
+    
+    // Navigate to index.html
+    navigateToIndex(); 
 }
 
-
-/*function placeOrder() {
-    console.log('Placing order:', orderList);
-    // Reset the orderList after placing the order
-    orderList = [];
-    displayOrder(orderList);
-
-    // Navigate to index.html
-    //navigateToIndex();
-}*/
+// Function to calculate the total amount based on the items in the order
+function calculateTotalAmount(orderItems) {
+    return orderItems.reduce((total, item) => total + item.price, 0);
+}
 
 function navigateToIndex() {
     window.location.href = '/index.html';

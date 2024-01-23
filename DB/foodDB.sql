@@ -302,11 +302,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `fooddb`;
-INSERT INTO `customer_order` (`id`, `customer_id`, `table_id`, `order_date`, `total_amount`, `status`, `server_id`) VALUES (1, 101, 3, '2024-01-15 18:30:00', 69.96, 'Completed    ', 5);
+INSERT INTO `customer_order` (`id`, `customer_id`, `table_id`, `order_date`, `total_amount`, `status`, `server_id`) VALUES (1, 101, 3, '2024-01-15 18:30:00', 69.96, 'Completed', 5);
 INSERT INTO `customer_order` (`id`, `customer_id`, `table_id`, `order_date`, `total_amount`, `status`, `server_id`) VALUES (2, 102, 1, '2024-01-20 19:15:00', 10.99, 'In Progress', 3);
-INSERT INTO `customer_order` (`id`, `customer_id`, `table_id`, `order_date`, `total_amount`, `status`, `server_id`) VALUES (3, 103, 2, '2024-02-05 17:45:00', 50.97, 'Completed    ', 1);
+INSERT INTO `customer_order` (`id`, `customer_id`, `table_id`, `order_date`, `total_amount`, `status`, `server_id`) VALUES (3, 103, 2, '2024-02-05 17:45:00', 50.97, 'Completed', 1);
 INSERT INTO `customer_order` (`id`, `customer_id`, `table_id`, `order_date`, `total_amount`, `status`, `server_id`) VALUES (4, 104, 5, '2024-02-10 20:30:00', 40.98, 'In Progress', 4);
-INSERT INTO `customer_order` (`id`, `customer_id`, `table_id`, `order_date`, `total_amount`, `status`, `server_id`) VALUES (5, 105, 4, '2024-03-01 18:00:00', 28.97, 'Completed    ', 2);
+INSERT INTO `customer_order` (`id`, `customer_id`, `table_id`, `order_date`, `total_amount`, `status`, `server_id`) VALUES (5, 105, 4, '2024-03-01 18:00:00', 28.97, 'Completed', 2);
 
 COMMIT;
 
